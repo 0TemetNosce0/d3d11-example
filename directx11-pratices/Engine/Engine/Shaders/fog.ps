@@ -1,0 +1,18 @@
+Texture2D mappedSrv;
+SamplerState ss;
+
+struct PixelIn
+{
+	float4 pos : SV_POSITION;
+	float2 tex : TEXCOORD;
+	float fogFactor : FOG;
+};
+
+float4 PS(PixelIn pin) : SV_TARGET
+{
+	float4 texColor = mappedSrv.Sample(ss, pin.tex);
+	float4 fogColor = float4(0.7f, 0.7f, 0.7f, 1.0f);
+	float4 finalColor = pin.fogFactor*texColor + (1 - pin.fogFactor)*fogColor;
+
+	return finalColor;
+}

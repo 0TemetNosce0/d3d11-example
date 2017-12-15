@@ -364,6 +364,7 @@ HRESULT InitDevice()
 	}
 
     // Define the input layout
+	//顶点布局描述,描述顶点的布局信息
     D3D11_INPUT_ELEMENT_DESC layout[] =
     {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -428,9 +429,13 @@ HRESULT InitDevice()
     g_pImmediateContext->IASetVertexBuffers( 0, 1, &g_pVertexBuffer, &stride, &offset );
 
     // Create index buffer
+	//什么是索引缓存
+//索引指的是对顶点的索引，也就是我们上一篇BLOG中讲到的，想象一个正方形，有四个顶点，顺时针编号为 0, 1, 2, 3 那么它的索引就是{ 0,1,2 } {0, 2, 3}
+//为什么要用索引缓存
+//正方形一共就四个点，如果采用顶点缓存我们就要设计六个点(两个三角形)，这样就多存了无用点，这不科学
     WORD indices[] =
     {
-        3,1,0,
+        3,1,0,//一个三角形
         2,1,3,
 
         0,5,4,
@@ -442,7 +447,7 @@ HRESULT InitDevice()
         1,6,5,
         2,6,1,
 
-        2,7,6,
+        //2,7,6,
         3,7,2,
 
         6,4,5,
@@ -473,7 +478,7 @@ HRESULT InitDevice()
         return hr;
 
     // Initialize the world matrix
-	g_World = XMMatrixIdentity();
+	g_World = XMMatrixIdentity();//世界矩阵
 
     // Initialize the view matrix
 	XMVECTOR Eye = XMVectorSet( 0.0f, 1.0f, -5.0f, 0.0f );
@@ -548,7 +553,7 @@ void Render()
 {
     // Update our time
     static float t = 0.0f;
-    if( g_driverType == D3D_DRIVER_TYPE_REFERENCE )
+    if( g_driverType == D3D_DRIVER_TYPE_REFERENCE )//参考类型驱动，通过软件来支持所有的Direct3D功能。
     {
         t += ( float )XM_PI * 0.0125f;
     }
@@ -558,13 +563,14 @@ void Render()
         ULONGLONG timeCur = GetTickCount64();
         if( timeStart == 0 )
             timeStart = timeCur;
+		// 在每一帧求得当前时间与开始时间的时间差，除以1000求得已经过多少秒
         t = ( timeCur - timeStart ) / 1000.0f;
     }
 
     //
     // Animate the cube
     //
-	g_World = XMMatrixRotationY( t );
+	g_World = XMMatrixRotationY( t );////矩阵  围绕y轴的旋转变换
 
     //
     // Clear the back buffer
@@ -574,23 +580,24 @@ void Render()
     //
     // Update variables
     //
-    ConstantBuffer cb;
-	cb.mWorld = XMMatrixTranspose( g_World );
+    ConstantBuffer cb;//常量缓存
+	cb.mWorld = XMMatrixTranspose( g_World );//XMMatrixTranspose矩阵转置,
 	cb.mView = XMMatrixTranspose( g_View );
 	cb.mProjection = XMMatrixTranspose( g_Projection );
-	g_pImmediateContext->UpdateSubresource( g_pConstantBuffer, 0, nullptr, &cb, 0, 0 );
+	g_pImmediateContext->UpdateSubresource( g_pConstantBuffer, 0, nullptr, &cb, 0, 0 );//更新
 
     //
     // Renders a triangle
     //
 	g_pImmediateContext->VSSetShader( g_pVertexShader, nullptr, 0 );
-	g_pImmediateContext->VSSetConstantBuffers( 0, 1, &g_pConstantBuffer );
+	g_pImmediateContext->VSSetConstantBuffers( 0, 1, &g_pConstantBuffer );//设置顶点着色管道阶段使用的常量缓冲区。
 	g_pImmediateContext->PSSetShader( g_pPixelShader, nullptr, 0 );
+	////绘制索引，参数：索引个数，开始索引位置，在从顶点缓冲区读取顶点之前添加到每个索引的值。
 	g_pImmediateContext->DrawIndexed( 36, 0, 0 );        // 36 vertices needed for 12 triangles in a triangle list
 
     //
     // Present our back buffer to our front buffer
     //
     g_pSwapChain->Present( 0, 0 );
-}
+} 
 

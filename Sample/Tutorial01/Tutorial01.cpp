@@ -294,8 +294,12 @@ HRESULT InitDevice()
 
 	//创建渲染视图
     // Create a render target view
-    ID3D11Texture2D* pBackBuffer = nullptr;
-    hr = g_pSwapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), reinterpret_cast<void**>( &pBackBuffer ) );
+    ID3D11Texture2D* pBackBuffer = nullptr;//2d纹理,简单的说就是一个内存区域
+	//GetBuffer:(得到贴图的指针)
+	//1.缓存索引（0给出第一个缓存）；
+	//2.尝试操纵的接口类型（2D贴图类型就是ID3D11Texture2）
+	//3.获取缓存地址，必须使用LPVOID类型获得
+    hr = g_pSwapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), reinterpret_cast<void**>( &pBackBuffer ) );//
     if( FAILED( hr ) )
         return hr;
 	//创建渲染目标视图
@@ -307,7 +311,7 @@ HRESULT InitDevice()
 	//////绑定视图到输出合并器阶段
     g_pImmediateContext->OMSetRenderTargets( 1, &g_pRenderTargetView, nullptr );
 
-    // Setup the viewport视口
+    // Setup the viewport视口，这里渲染都是空的，所以视口设置为0.
     D3D11_VIEWPORT vp;
     vp.Width = (FLOAT)0;
     vp.Height = (FLOAT)0;
@@ -331,7 +335,7 @@ void Render()
 	//清除渲染目标视图的颜色缓冲区到一种特定的颜色。
     g_pImmediateContext->ClearRenderTargetView( g_pRenderTargetView, Colors::MediumVioletRed);
 	//调用交换链的Present函数在屏幕上显示渲染缓冲区的内容。
-    g_pSwapChain->Present( 0, 0 );
+    g_pSwapChain->Present( 0, 0 );//因为视口宽高为0，只会显示ClearRenderTargetView的颜色。
 
 
 }

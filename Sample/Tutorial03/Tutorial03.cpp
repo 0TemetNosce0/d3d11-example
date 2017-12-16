@@ -48,7 +48,7 @@ ID3D11VertexShader*     g_pVertexShader = nullptr;
 ID3D11PixelShader*      g_pPixelShader = nullptr;
 ID3D11InputLayout*      g_pVertexLayout = nullptr;
 ID3D11Buffer*           g_pVertexBuffer = nullptr;
-
+ID3D11RasterizerState*  m_rasterizerState = nullptr;//该接口表示用于配置管线光栅化阶段的状态组。
 
 //--------------------------------------------------------------------------------------
 // Forward declarations
@@ -409,6 +409,35 @@ HRESULT InitDevice()
 
     // Set primitive topology
     g_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+
+	{//
+
+		//FillMode：当指定为D3D11_FILL_WIREFRAME时，表示以线框模式渲染几何体；当指定为D3D11_FILL_SOLID时，表示以实心模式渲染几何体，这是默认值。
+		//CullMode：当指定为D3D11_CULL_NONE时，表示禁用背面消隐功能；当指定为D3D11_CULL_FRONT时，表示消隐朝前的三角形；当指定为D3D11_CULL_BACK时，表示消隐朝后的三角形，这是默认值。
+		
+		D3D11_RASTERIZER_DESC rasterizerDesc;//该结构体用于描述所要创建的光栅化状态块
+		rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;//D3D11_FILL_SOLID
+		rasterizerDesc.CullMode = D3D11_CULL_BACK;//D3D11_CULL_NONE
+		rasterizerDesc.FrontCounterClockwise = false;
+		rasterizerDesc.DepthClipEnable = true;
+		rasterizerDesc.AntialiasedLineEnable = false;
+
+		rasterizerDesc.DepthBias = 0;
+		rasterizerDesc.DepthBiasClamp = 0.0f;
+		rasterizerDesc.DepthClipEnable = true;
+		rasterizerDesc.MultisampleEnable = false;
+		rasterizerDesc.ScissorEnable = false;
+		rasterizerDesc.SlopeScaledDepthBias = 0.0f;
+
+		hr = g_pd3dDevice->CreateRasterizerState(&rasterizerDesc, &m_rasterizerState);// // 创建光栅化状态 
+
+		if (FAILED(hr))
+		{
+			MessageBox(0, L"CreateRasterizerState FAILED", 0, 0);
+			return false;
+		}
+		g_pImmediateContext->RSSetState(m_rasterizerState); //设置光栅化状态，使其生效 
+	}
 
     return S_OK;
 }

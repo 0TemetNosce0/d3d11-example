@@ -67,7 +67,7 @@ int WINAPI wWinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     MSG msg = {0};
     while( WM_QUIT != msg.message )
     {
-        if( PeekMessage( &msg, nullptr, 0, 0, PM_REMOVE ) )
+        if( PeekMessage( &msg, nullptr, 0, 0, PM_REMOVE ) )//这行叙述从消息队列中删除WM_PAINT之外的所有消息。如果队列中有一个WM_PAINT消息，就执行。
         {
             TranslateMessage( &msg );
             DispatchMessage( &msg );
@@ -213,6 +213,7 @@ HRESULT InitDevice()
     IDXGIFactory1* dxgiFactory = nullptr;
     {
         IDXGIDevice* dxgiDevice = nullptr;
+		//客户可以通过此函数来查询某个组件是否支持某个特定的接口。若支持QueryInterface将返回一个指向些接口的指针，不支持返回值将是一个错误代码
         hr = g_pd3dDevice->QueryInterface( __uuidof(IDXGIDevice), reinterpret_cast<void**>(&dxgiDevice) );
         if (SUCCEEDED(hr))
         {

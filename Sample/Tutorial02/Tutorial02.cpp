@@ -415,7 +415,7 @@ HRESULT InitDevice()
     g_pImmediateContext->IASetVertexBuffers( 0, 1, &g_pVertexBuffer, &stride, &offset );//设置顶点缓存
 
     // Set primitive topology
-// 设置顶点的拓扑组织结构（三角形列表、三角形扇、三角形条带…）
+// 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
     g_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
 
     return S_OK;

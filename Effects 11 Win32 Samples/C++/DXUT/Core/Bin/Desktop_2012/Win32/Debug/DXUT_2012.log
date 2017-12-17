@@ -1,0 +1,12 @@
+﻿  DXUT.cpp
+f:\d3d11-example\effects 11 win32 samples\c++\dxut\core\dxut.cpp(580): warning C4838: 从“UINT”转换到“LONG”需要收缩转换
+f:\d3d11-example\effects 11 win32 samples\c++\dxut\core\dxut.cpp(581): warning C4838: 从“UINT”转换到“LONG”需要收缩转换
+  DXUTDevice11.cpp
+  DXUTmisc.cpp
+  DXErr.cpp
+  DDSTextureLoader.cpp
+  Screengrab.cpp
+f:\d3d11-example\effects 11 win32 samples\c++\dxut\core\screengrab.cpp(1128): warning C4838: 从“UINT”转换到“INT”需要收缩转换
+  WICTextureLoader.cpp
+  正在生成代码...
+  DXUT_2012.vcxproj -> F:\d3d11-example\Effects 11 Win32 Samples\C++\DXUT\Core\Bin\Desktop_2012\Win32\Debug\DXUT.lib

@@ -1,0 +1,4 @@
+﻿  BasicHLSLFX11.cpp
+BasicHLSLFX11.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/SAFESEH”规范)
+  BasicHLSLFX11_2012.vcxproj -> F:\d3d11-example\Effects 11 Win32 Samples\C++\Debug\BasicHLSLFX11.exe
+  BasicHLSLFX11_2012.vcxproj -> F:\d3d11-example\Effects 11 Win32 Samples\C++\Debug\BasicHLSLFX11.pdb (Full PDB)

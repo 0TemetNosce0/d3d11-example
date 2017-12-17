@@ -477,7 +477,7 @@ HRESULT CALLBACK OnD3D11CreateDevice( ID3D11Device* pd3dDevice, const DXGI_SURFA
     V_RETURN( DXUTFindDXSDKMediaFileCch( str, MAX_PATH, L"DynamicShaderLinkageFX11.fx" ) );
 
     ID3DBlob* pErrorBlob = nullptr;
-    hr = D3DX11CompileEffectFromFile( str, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, dwShaderFlags, D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS, pd3dDevice, &g_pEffect, &pErrorBlob );
+    hr = D3DX11CompileEffectFromFile( str, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, dwShaderFlags, D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS, pd3dDevice, &g_pEffect, &pErrorBlob );//±‡“Îshader
     if ( pErrorBlob )
     {
         OutputDebugStringA( reinterpret_cast<const char*>( pErrorBlob->GetBufferPointer() ) );

@@ -392,7 +392,7 @@ HRESULT CALLBACK OnD3D11CreateDevice( ID3D11Device* pd3dDevice, const DXGI_SURFA
     V_RETURN( DXUTFindDXSDKMediaFileCch( szShaderPath, MAX_PATH, L"BasicHLSLFX11.fx" ) );
 
     ID3DBlob* pErrorBlob = nullptr;
-    hr = D3DX11CompileEffectFromFile( szShaderPath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, dwShaderFlags, 0, pd3dDevice, &g_pEffect, &pErrorBlob );
+    hr = D3DX11CompileEffectFromFile( szShaderPath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, dwShaderFlags, 0, pd3dDevice, &g_pEffect, &pErrorBlob );//±‡“Îshader
 
     if ( pErrorBlob )
     {

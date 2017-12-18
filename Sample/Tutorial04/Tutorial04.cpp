@@ -59,9 +59,9 @@ ID3D11InputLayout*      g_pVertexLayout = nullptr;
 ID3D11Buffer*           g_pVertexBuffer = nullptr;
 ID3D11Buffer*           g_pIndexBuffer = nullptr;
 ID3D11Buffer*           g_pConstantBuffer = nullptr;
-XMMATRIX                g_World;
-XMMATRIX                g_View;
-XMMATRIX                g_Projection;
+XMMATRIX                g_World;//世界矩阵
+XMMATRIX                g_View;//视图矩阵
+XMMATRIX                g_Projection;//投影矩阵
 
 
 //--------------------------------------------------------------------------------------

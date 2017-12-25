@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial01", "Tutorial01\Tutorial01_2012.vcxproj", "{06EDC280-1187-4614-A248-E640C095FA6B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial02", "Tutorial02\Tutorial02_2012.vcxproj", "{28877253-3120-4098-86B8-BAAC1C0AF240}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial02_01", "Tutorial02\Tutorial02_2012.vcxproj", "{28877253-3120-4098-86B8-BAAC1C0AF240}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial03", "Tutorial03\Tutorial03_2012.vcxproj", "{4D201D5F-2B78-4D13-9774-E77012EADEF1}"
 EndProject
@@ -14,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial06", "Tutorial06\Tutorial06_2012.vcxproj", "{291B6A55-368E-4420-A0EB-FBE077B9F137}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial07", "Tutorial07\Tutorial07_2012.vcxproj", "{D29C6982-A589-4081-89B1-91E78D7C41E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial02", "Tutorial02_01\Tutorial02_01_2012.vcxproj", "{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +155,18 @@ Global
 		{D29C6982-A589-4081-89B1-91E78D7C41E2}.Release|x64.ActiveCfg = Release|x64
 		{D29C6982-A589-4081-89B1-91E78D7C41E2}.Release|x64.Build.0 = Release|x64
 		{D29C6982-A589-4081-89B1-91E78D7C41E2}.Release|x64.Deploy.0 = Release|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Debug|Win32.Build.0 = Debug|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Debug|x64.ActiveCfg = Debug|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Debug|x64.Build.0 = Debug|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Profile|Win32.ActiveCfg = Profile|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Profile|Win32.Build.0 = Profile|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Profile|x64.ActiveCfg = Profile|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Profile|x64.Build.0 = Profile|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Release|Win32.ActiveCfg = Release|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Release|Win32.Build.0 = Release|Win32
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Release|x64.ActiveCfg = Release|x64
+		{EB532151-B46A-4C8C-8BC8-30E25F67B9AF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

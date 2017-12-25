@@ -40,7 +40,6 @@ D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
 ID3D11Device*           g_pd3dDevice = nullptr;
 ID3D11Device1*          g_pd3dDevice1 = nullptr;
 ID3D11DeviceContext*    g_pImmediateContext = nullptr;
-ID3D11DeviceContext*    g_pImmediateContext_test = nullptr;
 ID3D11DeviceContext1*   g_pImmediateContext1 = nullptr;
 IDXGISwapChain*         g_pSwapChain = nullptr;
 IDXGISwapChain1*        g_pSwapChain1 = nullptr;
@@ -431,13 +430,13 @@ HRESULT InitDevice()
         return hr;
 
     // Set vertex buffer
-    UINT stride = sizeof( SimpleVertex );
-    UINT offset = 0;
-    g_pImmediateContext->IASetVertexBuffers( 0, 1, &g_pVertexBuffer, &stride, &offset );//设置顶点缓存
+    //UINT stride = sizeof( SimpleVertex );
+    //UINT offset = 0;
+    //g_pImmediateContext->IASetVertexBuffers( 0, 1, &g_pVertexBuffer, &stride, &offset );//设置顶点缓存
 
     // Set primitive topology
 // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
-    g_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+    //g_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
 
 
 ////////宁一个三角形的顶点设置
@@ -468,15 +467,18 @@ HRESULT InitDevice()
 			return hr;
 
 		// Set vertex buffer
-		UINT stride = sizeof(SimpleVertex);
-		UINT offset = 0;
-		g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer_test, &stride, &offset);//设置顶点缓存
+		//UINT stride = sizeof(SimpleVertex);
+		//UINT offset = 0;
+		//g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer_test, &stride, &offset);//设置顶点缓存
 
-																						  // Set primitive topology
-																						  // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
-		g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		//																				  // Set primitive topology
+		//																				  // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
+		//g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	}
+// Set primitive topology
+// 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
+	g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     return S_OK;
 }
 
@@ -539,33 +541,32 @@ void Render()
 {
     // Clear the back buffer 
     g_pImmediateContext->ClearRenderTargetView( g_pRenderTargetView, Colors::MidnightBlue );
+	
 	// Set vertex buffer
 	UINT stride = sizeof(SimpleVertex);
 	UINT offset = 0;
 	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);//设置顶点缓存
-
-																						   // Set primitive topology
-																						   // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
-	g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    // Render a triangle
+	// Set primitive topology
+	// 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
+	//g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+   
+	// Render a triangle
 	//通过VSSetShader() 和 PSSetShader()两个方法将顶点着色器和像素着色器绑定到管线上，
 	//当我们使用Draw方法时，将顶点缓存信息Vertex Buffer传入到绘图管线中进行绘制
 	g_pImmediateContext->VSSetShader( g_pVertexShader, nullptr, 0 );//设定设备的顶点着色器
 	g_pImmediateContext->PSSetShader( g_pPixelShader, nullptr, 0 );//设定设备的像素着色器
     g_pImmediateContext->Draw( 6, 0 );//绘制，两个三角形需要6个顶点
 
-									  // Set vertex buffer
-	//UINT stride = sizeof(SimpleVertex);
-	//UINT offset = 0;
-	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer_test, &stride, &offset);//设置顶点缓存
 
-																						   // Set primitive topology
-																						   // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
-	g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer_test, &stride, &offset);//设置顶点缓存
+	//g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	
 	//在上面绘制完成后，又绘制。
 	g_pImmediateContext->VSSetShader(g_pVertexShader, nullptr, 0);//设定设备的顶点着色器
 	g_pImmediateContext->PSSetShader(g_pPixelShader_test, nullptr, 0);//设定设备的像素着色器
 	g_pImmediateContext->Draw(6, 0);//绘制，两个三角形需要6个顶点
-    // Present the information rendered to the back buffer to the front buffer (the screen)
+   
+									
+	// Present the information rendered to the back buffer to the front buffer (the screen)
     g_pSwapChain->Present( 0, 0 );
 }

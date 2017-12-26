@@ -442,25 +442,15 @@ HRESULT InitDevice()
 ////////宁一个三角形的顶点设置
 // Create vertex buffer
 	{
-		//SimpleVertex vertices_test[] =//顶点列表
-		//{
-		//	//XMFLOAT3(0.0f, 0.0f, 0.0f),
-		//	//XMFLOAT3(1.0f, -1.0f, 0.0f),
-		//	//XMFLOAT3(-1.0f, -1.0f, 0.0f),
-
-		//	XMFLOAT3(-1.0f, 1.0f, 0.0f),
-		//	XMFLOAT3(1.0f, 1.0f, 0.0f),
-		//	XMFLOAT3(0.0f, 0.0f, 0.0f),
-		//};
 		SimpleVertex vertices_test[] =//顶点列表
 		{
 			//XMFLOAT3(0.0f, 0.0f, 0.0f),
 			//XMFLOAT3(1.0f, -1.0f, 0.0f),
 			//XMFLOAT3(-1.0f, -1.0f, 0.0f),
 
+			XMFLOAT3(-1.0f, 1.0f, 0.0f),
+			XMFLOAT3(1.0f, 1.0f, 0.0f),
 			XMFLOAT3(0.0f, 0.0f, 0.0f),
-			XMFLOAT3(0.0f, -1.0f, 0.0f),
-			XMFLOAT3(-0.01f, -0.99f, 0.0f),
 		};
 		D3D11_BUFFER_DESC bd;//缓存描述
 		ZeroMemory(&bd, sizeof(bd));
@@ -565,7 +555,7 @@ void Render()
 	//当我们使用Draw方法时，将顶点缓存信息Vertex Buffer传入到绘图管线中进行绘制
 	g_pImmediateContext->VSSetShader( g_pVertexShader, nullptr, 0 );//设定设备的顶点着色器
 	g_pImmediateContext->PSSetShader( g_pPixelShader, nullptr, 0 );//设定设备的像素着色器
-    //g_pImmediateContext->Draw( 6, 0 );//绘制，两个三角形需要6个顶点
+    g_pImmediateContext->Draw( 6, 0 );//绘制，两个三角形需要6个顶点
 
 
 	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer_test, &stride, &offset);//设置顶点缓存

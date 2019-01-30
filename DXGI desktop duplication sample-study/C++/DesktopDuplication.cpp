@@ -15,7 +15,7 @@
 //
 // Globals
 //
-OUTPUTMANAGER OutMgr;
+OUTPUTMANAGER OutMgr;//输出管理
 
 // Below are lists of errors expect from Dxgi API calls when a transition event like mode change, PnpStop, PnpStart
 // desktop switch, TDR or session disconnect/reconnect. In all these cases we want the application to clean up the threads that process
@@ -238,7 +238,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     ShowWindow(WindowHandle, nCmdShow);
     UpdateWindow(WindowHandle);
 
-    THREADMANAGER ThreadMgr;
+    THREADMANAGER ThreadMgr;//线程
     RECT DeskBounds;
     UINT OutputCount;
 
@@ -248,6 +248,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     bool Occluded = true;
     DYNAMIC_WAIT DynamicWait;
 
+	//
     while (WM_QUIT != msg.message)
     {
         DUPL_RETURN Ret = DUPL_RETURN_SUCCESS;
@@ -295,7 +296,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             }
 
             // Re-initialize
-            Ret = OutMgr.InitOutput(WindowHandle, SingleOutput, &OutputCount, &DeskBounds);
+            Ret = OutMgr.InitOutput(WindowHandle, SingleOutput, &OutputCount, &DeskBounds);//初始化输出
             if (Ret == DUPL_RETURN_SUCCESS)
             {
                 HANDLE SharedHandle = OutMgr.GetSharedHandle();

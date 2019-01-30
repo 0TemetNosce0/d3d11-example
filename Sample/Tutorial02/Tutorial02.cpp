@@ -20,7 +20,7 @@
 #include "resource.h"
 
 using namespace DirectX;
-
+const int nCircel = 300;
 //--------------------------------------------------------------------------------------
 // Structures
 //--------------------------------------------------------------------------------------
@@ -385,20 +385,45 @@ HRESULT InitDevice()
         return hr;
 
     // Create vertex buffer
-    SimpleVertex vertices[] =//顶点列表
-    {
-        XMFLOAT3( 0.0f, 0.0f, 0.0f ),
-        XMFLOAT3( 1.0f, -1.0f, 0.0f ),
-        XMFLOAT3( -1.0f, -1.0f, 0.0f ),
+	double x2;
+	double y2;
+	SimpleVertex vertices[360];
+	int i = 0;
+	
+	const float R = 0.03f;
+	const float pi = 3.14159264f;
+	//for (long angle = 1.0f; angle<361.0f; angle += 1.0)
+		for (int i = 0; i<360; i++)
+	{
 
-		XMFLOAT3(-1.0f, 1.0f, 0.0f),
-		XMFLOAT3(1.0f, 1.0f, 0.0f),
-		XMFLOAT3(0.0f, 0.0f, 0.0f),
-    };
+		//x2 = sin(angle)/**1.0L*/;
+
+		//y2 = cos(angle)/**1.0L*/;
+
+		vertices[i] = {
+			XMFLOAT3(R*cos(2 * pi*i / nCircel), R*sin(2 * pi *i / nCircel), 0.0f),
+		};
+		//vertices[3] = { XMFLOAT3(0.0f, 0.0f, 0.0f), };
+		//i++;
+	}
+		vertices[359] = vertices[0];
+	//vertices[0] = {XMFLOAT3(0.0f, 0.0f, 0.0f), };
+	//vertices[1] = { XMFLOAT3(1.0f, -1.0f, 0.0f), };
+	//vertices[2] = { XMFLOAT3(-1.0f, -1.0f, 0.0f), };
+  //  SimpleVertex vertices[] =//顶点列表
+  //  {
+  //      XMFLOAT3( 0.0f, 0.0f, 0.0f ),
+  //      XMFLOAT3( 1.0f, -1.0f, 0.0f ),
+  //      XMFLOAT3( -1.0f, -1.0f, 0.0f ),
+
+		//XMFLOAT3(-1.0f, 1.0f, 0.0f),
+		//XMFLOAT3(1.0f, 1.0f, 0.0f),
+		//XMFLOAT3(0.0f, 0.0f, 0.0f),
+  //  };
     D3D11_BUFFER_DESC bd;//缓存描述
 	ZeroMemory( &bd, sizeof(bd) );
     bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof( SimpleVertex ) * 6;//两个三角形需要6个点，绘制正方形是两个三角形，也需要6个顶点
+    bd.ByteWidth = sizeof( SimpleVertex ) * nCircel;//两个三角形需要6个点，绘制正方形是两个三角形，也需要6个顶点
     bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = 0;
     D3D11_SUBRESOURCE_DATA InitData;
@@ -416,7 +441,7 @@ HRESULT InitDevice()
 
     // Set primitive topology
 // 指定图元拓扑类型（三角形列表、三角形扇、三角形条带…）
-    g_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+    g_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST/*D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP*/);
 
     return S_OK;
 }
@@ -486,7 +511,7 @@ void Render()
 	//当我们使用Draw方法时，将顶点缓存信息Vertex Buffer传入到绘图管线中进行绘制
 	g_pImmediateContext->VSSetShader( g_pVertexShader, nullptr, 0 );//设定设备的顶点着色器
 	g_pImmediateContext->PSSetShader( g_pPixelShader, nullptr, 0 );//设定设备的像素着色器
-    g_pImmediateContext->Draw( 6, 0 );//绘制，两个三角形需要6个顶点
+    g_pImmediateContext->Draw(nCircel, 0 );//绘制，两个三角形需要6个顶点
 
     // Present the information rendered to the back buffer to the front buffer (the screen)
     g_pSwapChain->Present( 0, 0 );

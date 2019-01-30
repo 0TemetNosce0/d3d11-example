@@ -61,7 +61,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
         D3D_DRIVER_TYPE_HARDWARE,
         D3D_DRIVER_TYPE_WARP,
         D3D_DRIVER_TYPE_REFERENCE,
-    };
+    };//d3d驱动了类型
     UINT NumDriverTypes = ARRAYSIZE(DriverTypes);
 
     // Feature levels supported
@@ -71,7 +71,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
         D3D_FEATURE_LEVEL_10_1,
         D3D_FEATURE_LEVEL_10_0,
         D3D_FEATURE_LEVEL_9_1
-    };
+    };//等级
     UINT NumFeatureLevels = ARRAYSIZE(FeatureLevels);
     D3D_FEATURE_LEVEL FeatureLevel;
 
@@ -85,7 +85,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
             // Device creation succeeded, no need to loop anymore
             break;
         }
-    }
+    }//创建d3d设备
     if (FAILED(hr))
     {
         return ProcessFailure(m_Device, L"Device creation in OUTPUTMANAGER failed", L"Error", hr, SystemTransitionsExpectedErrors);
@@ -130,7 +130,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     UINT Height = WindowRect.bottom - WindowRect.top;
 
     // Create swapchain for window
-    DXGI_SWAP_CHAIN_DESC1 SwapChainDesc;
+    DXGI_SWAP_CHAIN_DESC1 SwapChainDesc;//交换链
     RtlZeroMemory(&SwapChainDesc, sizeof(SwapChainDesc));
 
     SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;

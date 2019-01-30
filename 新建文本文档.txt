@@ -18,6 +18,10 @@ dx11以及移除了effect框架。
 第二个好处是Effect框架下，Directx中的变量和HLSL中的变量绑定逻辑比较清晰（也可以说简单）。
 
 在最新的effect框架中D3DX11CompileFromFile已经废弃了吧，改用D3DX11CompileEffectFromFile
+
+打开Effects11_2015 解决方案 并且使用VS2015重新生成lib库文件的Debug版本和Release版本
+将Debug版本的lib库文件重命名为Effects11d.lib,Release版本的lib库文件重命名为Effectsll.lib.并复制
+d3dx11effect.h和effect1d.lib和Effectsll.lib相应目录
 ======
 在Direct3D中，除了材质的概念，还存在一个渲染状态（Render State）的概念
 ======
@@ -79,3 +83,11 @@ VC中,切换到"解决方案视图",--->选中要添加lib的工程-->点击右�
 这个方法适用于在我的工程的debug版本和Release版本中都使用同一个lib库文件时.这样就省去了你1方法配置环境的繁琐,也省去了方法2种语句的可能性错误发生.
 功不成，身已退
 ===============
+FXC : error X3501: 'main': entrypoint not found
+
+这个问题出现的原因是将.fx文件（着色器文件）导入自己新建的工程以后，VS2013会默认使用HLSL编译器对其进行编译，而.fx文件中并未定义main函数，所以会导致编译出错。
+
+解决方法是：
+
+右键.fx文件，“属性->配置属性->常规->项类型”，将“HLSL编译器”改为“不参与生成”
+=======================
